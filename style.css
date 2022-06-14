@@ -1,9 +1,11 @@
 :root {
     --cream: #fffcf2;
     --beige: #ccc5b9;
-    --gray: #403D39;
-    --black: #252422;
-    --orange: #EB5E28;
+    --aqua: #E0FBFC;
+    --blue: #98C1D9;
+    --darkblue: #3D5A80;
+    --black: #293241;
+    --orange: #EE6C4D;
 }
 
 a {
@@ -14,7 +16,8 @@ a {
 * {
     padding: 0;
     margin: 0;
-    background-color: var(--cream);
+    color: var(--black);
+    font-family: 'Rubik', sans-serif;
 }
 
 html {
@@ -22,6 +25,7 @@ html {
 }
 
 body {
+    background-color: var(--aqua);
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -33,6 +37,88 @@ main {
     margin-bottom: auto;
     height: 772px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background-color: var(--darkblue);
+    height: 700px;
+    width: 430px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 3px solid black;
+}
+
+.screen {
+    background-color: white;
+    width: 350px;
+    height: 120px;
+    margin-top: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.screenText {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.smallScreenText {
+    font-size: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.row1,
+.row2,
+.row3,
+.row4,
+.row5,
+.row6 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.row6 {
+    margin-bottom: 20px;
+}
+
+.clear,
+.delete {
+    width: 170px;
+    height: 80px;
+}
+
+.clear {
+    background-color: var(--orange);
+}
+
+.delete {
+    background-color: var(--beige);
+}
+
+button {
+    width: 80px;
+    height: 68px;
+    border-radius: 8px;
+    background-color: white;
+    margin: -5px 5px;
+    border: 3px solid black;
+    font-size: 22px;
 }
 
 .footer {
@@ -41,4 +127,16 @@ main {
     margin-top: auto;
     width: 100%;
     text-align: center;
+}
+
+.hover {
+    background-color: rgb(236, 236, 236);
+}
+
+.hoverClear {
+    background-color: #cd5e42;
+}
+
+.hoverDelete {
+    background-color: #aba59c;
 }

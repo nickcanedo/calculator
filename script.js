@@ -39,7 +39,7 @@ function factorial(num) {
 }
 
 // operate function
-function operate(operator, a, b=undefined) {
+function operate(a, operator, b=undefined) {
     a = Number(a);
     b = Number(b);
     switch (operator) {
@@ -47,7 +47,7 @@ function operate(operator, a, b=undefined) {
             return add(a,b);
         case "-":
             return subtract(a,b);
-        case "*":
+        case "x":
             return multiply(a,b);
         case "/":
             return divide(a,b);
@@ -58,7 +58,34 @@ function operate(operator, a, b=undefined) {
         case "!":
             return factorial(a)
     }
+    num1 = 0;
+    num2 = 0;
+    operator = "";
 }
+
+// add button click event listeners to display numbers on screen and manipulate them
+const buttons = document.querySelectorAll("button");
+const screenPara = document.querySelector(".screenText");
+
+buttons.forEach(button => button.addEventListener("click", e => {
+    // clear button functionality
+    if (e.target.textContent === "AC") screenPara.textContent = "";
+    // delete button functionality
+    else if (e.target.textContent === "DEL") {
+        screenPara.textContent = screenPara.textContent.slice(0,-1);
+    } else screenPara.textContent += e.target.textContent;
+}));
+
+// add operator recognition
+let num1;
+let num2;
+const operators = document.querySelectorAll(".operator");
+operators.forEach(operator => operator.addEventListener("click", e => {
+    num1 = screenPara.textContent.slice(0,-1);
+    operator = e.target.textContent;
+    console.log(num1);
+    console.log(operator);
+}));
 
 // github icon event listener
 const github = document.querySelector(".fa-brands");
@@ -70,3 +97,16 @@ github.addEventListener("mouseenter", () => {
 github.addEventListener("mouseleave", () => {
     github.classList.remove("fa-bounce");
 });
+
+// button hover effect
+buttons.forEach(button => button.addEventListener("mouseenter", e => {
+    if (e.target.textContent === "AC") e.target.classList.add("hoverClear");
+    else if (e.target.textContent === "DEL") e.target.classList.add("hoverDelete");
+    else e.target.classList.add("hover");
+}))
+
+buttons.forEach(button => button.addEventListener("mouseleave", e => {
+    if (e.target.textContent === "AC") e.target.classList.remove("hoverClear");
+    else if (e.target.textContent === "DEL") e.target.classList.remove("hoverDelete");
+    else e.target.classList.remove("hover");
+}))
