@@ -24,8 +24,8 @@ function power(a,b) {
 }
 
 // square root function
-function sqrt(a,b) {
-    return a**(1/b);
+function sqrt(a) {
+    return a**(1/2);
 }
 
 // factorial function
@@ -42,50 +42,86 @@ function factorial(num) {
 function operate(a, operator, b=undefined) {
     a = Number(a);
     b = Number(b);
+    let answer;
     switch (operator) {
         case "+": 
-            return add(a,b);
+            answer = add(a,b);
+            break;
         case "-":
-            return subtract(a,b);
+            answer = subtract(a,b);
+            break;
         case "x":
-            return multiply(a,b);
-        case "/":
-            return divide(a,b);
+            answer = multiply(a,b);
+            break;
+        case "÷":
+            answer = divide(a,b);
+            break;
         case "^":
-            return power(a,b);
+            answer = power(a,b);
+            break;
         case "√":
-            return sqrt(a,b);
+            answer = sqrt(a);
+            break;
         case "!":
-            return factorial(a)
+            answer = factorial(a);
+            break;
     }
-    num1 = 0;
-    num2 = 0;
-    operator = "";
+    if (answer == "Infinity" || Number.isNaN(answer)) return "ERROR";
+    return Math.round(answer*1e13)/1e13;
 }
 
 // add button click event listeners to display numbers on screen and manipulate them
 const buttons = document.querySelectorAll("button");
 const screenPara = document.querySelector(".screenText");
+let value;
+
+// add operator recognition
+const operators = document.querySelectorAll(".operator");
+let lastChar;
+operators.forEach(operator => operator.addEventListener("click", e => {
+    lastChar = screenPara.textContent.slice(-2,-1);
+    if (lastChar === "+" || lastChar === "-" || lastChar === "x" || lastChar === "÷") {
+        screenPara.textContent = screenPara.textContent.slice(0,-3) + ` ${e.target.textContent} `;
+    }
+    else {
+        screenPara.textContent += ` ${e.target.textContent} `;
+    }
+}));
 
 buttons.forEach(button => button.addEventListener("click", e => {
     // clear button functionality
-    if (e.target.textContent === "AC") screenPara.textContent = "";
+    if (e.target.textContent === "AC") {
+        screenPara.textContent = "0";
+    }
     // delete button functionality
     else if (e.target.textContent === "DEL") {
-        screenPara.textContent = screenPara.textContent.slice(0,-1);
-    } else screenPara.textContent += e.target.textContent;
+        if (screenPara.textContent === "ERROR") screenPara.textContent = "0";
+        else screenPara.textContent = screenPara.textContent.slice(0,-1);
+    } 
+    // keypad button functionality
+    else if (!(e.target.classList.contains("operator") || e.target.textContent === "=")) {
+        if (screenPara.textContent === "0") screenPara.textContent = e.target.textContent;
+        else screenPara.textContent += e.target.textContent;
+    }
+    // equal sign button functionality
+    else if (e.target.textContent === "=") {
+        let screenArray = screenPara.textContent.split(" ");
+        lastChar = screenPara.textContent.slice(-2,-1);
+        if (lastChar === "+" || lastChar === "-" || lastChar === "x" || lastChar === "÷") {
+            screenPara.textContent = "ERROR";
+        }
+        else {
+            while (screenArray.length > 1) {
+                value = [operate(screenArray[0],screenArray[1],screenArray[2])];
+                screenArray = value.concat(screenArray.slice(3));
+            }
+            screenPara.textContent = screenArray;
+        }
+    }
 }));
 
-// add operator recognition
-let num1;
-let num2;
-const operators = document.querySelectorAll(".operator");
-operators.forEach(operator => operator.addEventListener("click", e => {
-    num1 = screenPara.textContent.slice(0,-1);
-    operator = e.target.textContent;
-    console.log(num1);
-    console.log(operator);
-}));
+// on page load default event
+window.addEventListener("load", () => screenPara.textContent = "0");
 
 // github icon event listener
 const github = document.querySelector(".fa-brands");

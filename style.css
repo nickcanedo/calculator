@@ -6,6 +6,7 @@
     --darkblue: #3D5A80;
     --black: #293241;
     --orange: #EE6C4D;
+    --green: #2cb67d;
 }
 
 a {
@@ -58,13 +59,11 @@ main {
     background-color: white;
     width: 350px;
     height: 120px;
-    margin-top: 20px;
     border-radius: 10px;
-    margin-bottom: 10px;
     border: 3px solid black;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: end;
     align-items: flex-end;
 }
 
@@ -73,27 +72,25 @@ main {
     margin-bottom: 15px;
     font-size: 32px;
     font-weight: bold;
-}
-
-.smallScreenText {
-    font-size: 20px;
-    margin-right: 10px;
-    margin-top: 10px;
+    max-width: 330px;
+    max-height: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .row1,
 .row2,
 .row3,
 .row4,
-.row5,
-.row6 {
+.row5 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
-.row6 {
+.row5 {
     margin-bottom: 20px;
 }
 
@@ -108,7 +105,7 @@ main {
 }
 
 .delete {
-    background-color: var(--beige);
+    background-color: var(--green);
 }
 
 button {
@@ -116,7 +113,7 @@ button {
     height: 68px;
     border-radius: 8px;
     background-color: white;
-    margin: -5px 5px;
+    margin: -30px 5px;
     border: 3px solid black;
     font-size: 22px;
 }
@@ -138,5 +135,5 @@ button {
 }
 
 .hoverDelete {
-    background-color: #aba59c;
+    background-color: #239a68;
 }
